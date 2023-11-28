@@ -4,15 +4,11 @@ entities:
     head:
       type: custom:config-template-card
       variables:
-        - states['sensor.washer_dryer_max_time'].state
         - states['sensor.washer_dryer_delay_time'].state
-        - states['sensor.washer_dryer_wash_time'].state
         - states['sensor.washer_dryer_dry_time'].state
       entities:
-        - sensor.washer_dryer_max_time
         - sensor.washer_dryer_total_time
         - sensor.washer_dryer_delay_time
-        - sensor.washer_dryer_wash_time
         - sensor.washer_dryer_dry_time
       card:
         type: custom:bar-card
@@ -20,15 +16,15 @@ entities:
           - entity: sensor.washer_dryer_total_time
             name: |-
               "${vars[1] > 0 ? 'Washer/Dryer - Delayed'
-               : vars[3] != 'Dry Off' ? 'Washer/Dryer - Drying' 
-               : vars[2] > 0 ? 'Washer/Dryer - Washing' 
+               : vars[3] != 'Dry Off' ? 'Washer/Dryer - Drying'
+               : vars[2] > 0 ? 'Washer/Dryer - Washing'
                : 'Washer/Dryer - Finished'}"
             unit_of_measurement: mins
-            min: '0'
+            min: "0"
             max: ${+vars[0]}
             icon: mdi:washing-machine
             positions:
-              indicator: 'off'
+              indicator: "off"
             severity:
               - color: |-
                   "${vars[1] > 0 ? '#7634c7'
@@ -66,18 +62,18 @@ entities:
         name: Program
       - entity: sensor.washer_dryer_phase
         name: Phase
-      - entity: sensor.washer_dryer_wash_temp
-        name: Wash Temp
-      - entity: sensor.washer_dryer_spin_speed
-        name: Spin Speed
-      - entity: sensor.washer_dryer_dry_time
+      - entity: sensor.washer_dryer_dry_level
         name: Dry Setting
-      - entity: sensor.washer_dryer_wash_time
-        name: Cycle Time
       - entity: sensor.washer_dryer_delay_time
         name: Delay Time
       - entity: sensor.washer_dryer_error
         name: Error
+      - entity: sensor.washer_dryer_door_status
+        name: Door
+      - entity: sensor.washer_dryer_clean_filter
+        name: Filter
+      - entity: sensor.washer_dryer_water_tank
+        name: Water Tank
     style: |
       #items {
         padding: 0px 20px 0px 10px !important;
@@ -94,3 +90,23 @@ style: |
   #states > div {
     margin: 0px 0px !important;
   }
+
+## Simple config
+
+# type: entities
+# entities:
+#   - entity: sensor.washer_dryer_clean_filter
+#   - entity: sensor.washer_dryer_delay_time
+#   - entity: sensor.washer_dryer_door_status
+#   - entity: sensor.washer_dryer_dry_level
+#   - entity: sensor.washer_dryer_dry_time
+#   - entity: sensor.washer_dryer_error
+#   - entity: sensor.washer_dryer_max_delay
+#   - entity: sensor.washer_dryer_phase
+#   - entity: sensor.washer_dryer_program
+#   - entity: sensor.washer_dryer_rapid_cycle
+#   - entity: sensor.washer_dryer_refresh_cycle
+#   - entity: sensor.washer_dryer_status
+#   - entity: sensor.washer_dryer_total_time
+#   - entity: sensor.washer_dryer_water_tank
+#   - entity: sensor.washer_dryer_wifi
